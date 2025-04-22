@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:map="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps"
+             xmlns:local="clr-namespace:StyleMarkerPins"
+             x:Class="StyleMarkerPins.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="HighPopulationTemplateKey">
+                <StackLayout IsClippedToBounds="false"
+                             HorizontalOptions="StartAndExpand"
+                             VerticalOptions="Center"
+                             HeightRequest="30">
+                    <Image Source="{Binding  HighPopulationMarker}"
+                           Scale="1"
+                           Aspect="AspectFit"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           HeightRequest="15"
+                           WidthRequest="23" />
+                </StackLayout>
+            </DataTemplate>
+            <DataTemplate x:Key="LowPopulationTemplateKey">
+                <StackLayout IsClippedToBounds="false"
+                             HorizontalOptions="StartAndExpand"
+                             VerticalOptions="Center"
+                             HeightRequest="30">
+                    <Image Source="{Binding  LowPopulationMarker}"
+                           Scale="1"
+                           Aspect="AspectFit "
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"
+                           HeightRequest="15"
+                           WidthRequest="23" />
+                </StackLayout>
+            </DataTemplate>
+            <local:MapsDataTemplateSelector x:Key="MapsDataTemplateSelectorKey"
+                                            HighPopulationTemplate="{StaticResource HighPopulationTemplateKey}"
+                                            LowPopulationTemplate="{StaticResource LowPopulationTemplateKey}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <map:SfMaps>
+            <map:SfMaps.Layer>
+                <map:MapTileLayer x:Name="layer"
+                                  UrlTemplate="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                  MarkerTemplate="{StaticResource MapsDataTemplateSelectorKey}">
+                    <map:MapTileLayer.Markers>
+                        <map:MapMarkerCollection>
+                            <local:CustomMarker Population="321"
+                                                Latitude="37.090240"
+                                                Longitude="-95.712891" />
+                            <local:CustomMarker Population="204"
+                                                Latitude="-4.038333"
+                                                Longitude="21.758663" />
+                            <local:CustomMarker Population="137"
+                                                Latitude="48.019573"
+                                                Longitude="66.923683" />
+                            <local:CustomMarker Population="255"
+                                                Latitude="-25.274399"
+                                                Longitude="133.775131" />
+                        </map:MapMarkerCollection>
+                    </map:MapTileLayer.Markers>
+                </map:MapTileLayer>
+            </map:SfMaps.Layer>
+        </map:SfMaps>
+    </Grid>
+
+</ContentPage>
