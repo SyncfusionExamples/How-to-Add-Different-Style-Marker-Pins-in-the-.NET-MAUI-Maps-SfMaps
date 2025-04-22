@@ -25,6 +25,4 @@
             LowPopulationMarker = ImageSource.FromResource("StyleMarkerPins.PopulationMarkerPin2.png");
         }
     }
-
-
 }
